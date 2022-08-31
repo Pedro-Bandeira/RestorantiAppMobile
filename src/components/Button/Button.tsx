@@ -1,10 +1,8 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, View, Text, Alert } from "react-native";
 
-const cor: string = "";
-
 //{text}: {text: string}
-export default function Button( props) {
+export default function Button(props) {
 
     const clicou = () => {
         Alert.alert("Testando", "Testado")

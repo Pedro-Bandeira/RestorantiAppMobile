@@ -1,44 +1,62 @@
 import { StatusBar } from 'expo-status-bar';
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import Button from '../../components/Button/Button';
+import { useNavigation } from '@react-navigation/native';
+
+import { propsStack } from '../../routes/Stack/Models';
 
 export default function Login() {
 
-    const loginTeste = () => {
-        Alert.alert("Testando", "Testado")
-    }
+  const navigation = useNavigation<propsStack>()
 
-    return (
-        <View style={styles.container}>
-            <View style={styles.inputsLogo}>
-                <Image 
-                    source={require('../../../assets/icon.png')}
-                    style={styles.logo}
-                />
+  const loginTeste = () => {
+      Alert.alert("Testando", "ainda em construção")
+  }
 
-                <TextInput 
-                    placeholder='email'
-                    style={styles.input}
-                />
-                <TextInput 
-                    placeholder='senha'
-                    secureTextEntry={true}
-                    style={styles.input}
-                />
-            </View>
+  return (
+      <View style={styles.container}>
+          <View style={styles.inputsLogo}>
+              <Image 
+                  source={require('../../../assets/icon.png')}
+                  style={styles.logo}
+              />
+
+              <TextInput 
+                  placeholder='email'
+                  style={styles.input}
+              />
+              <TextInput 
+                  placeholder='senha'
+                  secureTextEntry={true}
+                  style={styles.input}
+              />
+          </View>
 
 
-            <View style={styles.buttons}>
-                <Button texto="OK" onPress={loginTeste}/>
-                <Button texto="Login"/>
-                <Button texto="Fazer Cadastro"/>
+          <View style={styles.buttons}>
+            <TouchableOpacity 
+              onPress={() => navigation.navigate("Menu", {user: "pedro"})}
+              style={styles.actionButton}>
+              <Text style={styles.actionButtonText}>Continuar sem login</Text>
+            </TouchableOpacity>
 
-                <Text style={styles.forgotPassword}>Esqueceu a senha?</Text>
-            </View>
+            <TouchableOpacity 
+              onPress={() => navigation.navigate("Menu", {user: "pedro"})}
+              style={styles.actionButton}>
+              <Text style={styles.actionButtonText}>Login</Text>
+            </TouchableOpacity>
 
-        <StatusBar style="auto" />
-        </View>
-    );
+            <TouchableOpacity 
+              onPress={() => navigation.navigate("Register")}
+              style={styles.actionButton}>
+              <Text style={styles.actionButtonText}>Cadastro</Text>
+            </TouchableOpacity>
+
+            <Text style={styles.forgotPassword} onPress={loginTeste}>Esqueceu a senha?</Text>
+          </View>
+
+      <StatusBar style="auto" />
+      </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -84,5 +102,23 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#FFF',
     top: 10
+  },
+
+  actionButton: {
+    backgroundColor: "#bdccdb",
+    height: 50,
+    width: 250,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopStartRadius: 20,
+    borderBottomEndRadius: 20,
+    borderTopEndRadius: 5,
+    borderBottomStartRadius: 5,
+    marginTop: 20
+  },
+
+  actionButtonText: {
+    fontWeight: 'bold',
+    fontSize: 18,
   }
 });
