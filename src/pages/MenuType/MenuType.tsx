@@ -1,5 +1,6 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, StatusBar, SafeAreaView } from "react-native";
+import Header from "../../components/Header/Index";
 
 import { propsStack } from '../../routes/Stack/Models';
 
@@ -10,7 +11,8 @@ export default function MenuType() {
     
     return (
         <View style={styles.container}>
-            <Text style={{fontSize: 20}}>Usuario: {params?.params?.user}</Text>
+            <StatusBar hidden={true} />
+            <Header user={params?.params?.user}/>
 
             <View style={styles.choices}>
                 <Text style={{color: '#fff'}}>Escolha seu tipo de cardápio:</Text>
@@ -35,7 +37,7 @@ export default function MenuType() {
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
-        justifyContent: "center", 
+        justifyContent: "flex-start", 
         alignItems: "center",
         backgroundColor: "#2c3e50"
     },
@@ -43,6 +45,7 @@ const styles = StyleSheet.create({
     choices: {
         alignItems: "center",
         justifyContent: "center",
+        flex: 1
     },
 
     buttons: {
@@ -53,5 +56,5 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 20
-    }
+    },
 })
