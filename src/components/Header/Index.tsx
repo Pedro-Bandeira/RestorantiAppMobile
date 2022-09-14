@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
         paddingLeft: 25,
         paddingRight: 25,
         backgroundColor: "#D9D9D9",
+        
     },
 
     logo: {
