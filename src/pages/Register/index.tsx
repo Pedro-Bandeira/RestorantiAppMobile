@@ -1,10 +1,25 @@
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image } from "react-native";
+import { useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image, Alert } from "react-native";
 import { propsStack } from "../../routes/Stack/Models";
 
 export default function Register() {
 
     const navigation = useNavigation<propsStack>()
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+
+    const registerUser = () => {
+        if(name.length > 3 && email.length > 5 && email.includes("@") && password.length > 5){
+            Alert.alert("Cadastrado com sucesso!", `Nome: ${name}\nEmail: ${email.toLowerCase()}\nSenha: ${password}`)
+        }
+        else{
+            Alert.alert("Dados inválidos", "Favor, verificar os dados de cadastro e tentar novamente!")
+        }
+    }
 
     return(
         <View style={styles.container}>
@@ -20,24 +35,34 @@ export default function Register() {
                 <TextInput 
                     placeholder='nome'
                     style={styles.input}
+                    onChangeText={(value) => {
+                        setName(value)
+                    }}
                 />
                 <TextInput 
                     placeholder='email'
                     style={styles.input}
+                    onChangeText={(value) => {
+                        setEmail(value)
+                    }}
                 />
                 <TextInput 
                     placeholder='senha'
                     style={styles.input}
+                    onChangeText={(value) => {
+                        setPassword(value)
+                    }}
                 />
             </View>
 
-            <TouchableOpacity style={styles.actionButton}>
-                <Text>CADASTRAR</Text>
+            <TouchableOpacity style={styles.actionButton} 
+                onPress={registerUser}>
+                <Text style={styles.actionButtonText}>Cadastrar</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigation.goBack()}
                 style={styles.actionButton}>
-                <Text>VOLTAR</Text>
+                <Text style={styles.actionButtonText}>Voltar</Text>
             </TouchableOpacity>
         </View>
     )
@@ -89,6 +114,11 @@ const styles = StyleSheet.create({
         borderBottomStartRadius: 5,
         marginTop: 20
     },
+
+    actionButtonText: {
+        fontWeight: 'bold',
+        fontSize: 18,
+    } ,
 
     header: {
         color: '#fff',

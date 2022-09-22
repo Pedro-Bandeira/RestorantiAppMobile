@@ -3,13 +3,27 @@ import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } fro
 import { useNavigation } from '@react-navigation/native';
 
 import { propsStack } from '../../routes/Stack/Models';
+import { useState } from 'react';
 
 export default function Login() {
 
   const navigation = useNavigation<propsStack>()
 
   const loginTeste = () => {
-      Alert.alert("Testando", "ainda em construção")
+    Alert.alert("Testando", "ainda em construção")
+  }
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const validaLogin = () => {
+    if(email.length < 6 || password.length < 6){
+      Alert.alert("Login inválido!", "Login ou senha inválido, tente novamente!")
+    }
+    else
+    {
+      navigation.navigate("Menu", {user: "user"})
+    }
   }
 
   return (
@@ -23,24 +37,30 @@ export default function Login() {
               <TextInput 
                   placeholder='email'
                   style={styles.input}
+                  onChangeText={(value) => {
+                    setEmail(value)
+                  }}
               />
               <TextInput 
                   placeholder='senha'
                   secureTextEntry={true}
                   style={styles.input}
+                  onChangeText={(value) => {
+                    setPassword(value)
+                  }}
               />
           </View>
 
 
           <View style={styles.buttons}>
             <TouchableOpacity 
-              onPress={() => navigation.navigate("Menu", {user: "pedro"})}
+              onPress={() => navigation.navigate("Menu", {user: "Mesa"})}
               style={styles.actionButton}>
               <Text style={styles.actionButtonText}>Continuar sem login</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
-              onPress={() => navigation.navigate("Menu", {user: "pedro"})}
+              onPress={validaLogin}
               style={styles.actionButton}>
               <Text style={styles.actionButtonText}>Login</Text>
             </TouchableOpacity>
@@ -101,7 +121,7 @@ const styles = StyleSheet.create({
   forgotPassword: {
     fontSize: 18,
     color: '#FFF',
-    top: 10
+    top: 20
   },
 
   actionButton: {

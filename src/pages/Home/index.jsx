@@ -1,5 +1,5 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, Alert } from "react-native";
 import Header from "../../components/Header/Index";
 import React, {useState} from "react"
 
@@ -9,49 +9,64 @@ const DATA = [
     {
         id: '1',
         title: 'Categoria 1',
+        type: 'aLaCarte',
     },
     {
         id: '2',
         title: 'Categoria 2',
+        type: 'aLaCarte',
     },
     {
         id: '3',
         title: 'Categoria 3',
+        type: 'aLaCarte',
     },
     {
         id: '4',
         title: 'Categoria 4',
+        type: 'aLaCarte',
     },
     {
         id: '5',
         title: 'Categoria 5',
+        type: 'aLaCarte',
     },
     {
         id: '6',
         title: 'Categoria 6',
+        type: 'rodizio',
     },
     {
         id: '7',
         title: 'Categoria 7',
+        type: 'rodizio',
     },
     {
         id: '8',
         title: 'Categoria 8',
+        type: 'rodizio',
     },
     {
         id: '9',
         title: 'Categoria 9',
+        type: 'aLaCarte',
     },
 ];
 
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-      <Text style={[styles.title, textColor]}>{item.title}</Text>
+        <Text style={[styles.title, textColor]}>{item.title}</Text>
     </TouchableOpacity>
-  );
+);
+
+
+const selectItem = (id) =>{
+    Alert.alert("",id)
+}
+
 
 export default function Home () {
-    
+
     const [selectedId, setSelectedId] = useState(null);
 
     const renderItem = ({ item }) => {
@@ -61,7 +76,7 @@ export default function Home () {
         return (
           <Item
             item={item}
-            onPress={() => setSelectedId(item.id)}
+            onPress={selectItem(item.id)}
             backgroundColor={{ backgroundColor }}
             textColor={{ color }}
           />
@@ -70,8 +85,14 @@ export default function Home () {
     
 
     const params = useRoute()
+    //recupera valor passado na tela de tipo cardapio
+    const menuType = params.params.menuType
     const navigation = useNavigation()
-    const menuType = params?.params?.menuType
+
+
+    let filteredDATA = DATA.filter((item) => {
+        return item.type.match(menuType); 
+    });
 
     return (
         <View style={{flex: 1, justifyContent: "flex-start", alignItems: "center"}}>
@@ -79,7 +100,7 @@ export default function Home () {
 
             <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
                 <FlatList
-                    data={DATA}
+                    data={filteredDATA}
                     numColumns={2} // Número de colunas
                     renderItem={renderItem}
                     keyExtractor={(item) => item.id}
