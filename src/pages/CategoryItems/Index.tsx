@@ -5,53 +5,71 @@ import React, {useState} from "react"
 
 import { propsStack } from "../../routes/Stack/Models";
 
-
+import {Container, ActionButton, ActionButtonText, LogoGrande} from '../styles'
 
 const DATA = [
     {
         id: '1',
-        title: 'Categoria 1',
+        title: 'Item 1',
         type: 'aLaCarte',
+        description: 'apenas descrição',
+        category: '6',
     },
     {
         id: '2',
-        title: 'Categoria 2',
+        title: 'Item 2',
         type: 'aLaCarte',
+        description: 'apenas descrição',
+        category: '6',
     },
     {
         id: '3',
-        title: 'Categoria 3',
+        title: 'Item 3',
         type: 'aLaCarte',
+        description: 'apenas descrição',
+        category: '6',
     },
     {
         id: '4',
-        title: 'Categoria 4',
-        type: 'aLaCarte',
+        title: 'Item 4',
+        type: 'rodizio',
+        description: 'apenas descrição',
+        category: '6',
     },
     {
         id: '5',
-        title: 'Categoria 5',
+        title: 'Item 5',
         type: 'aLaCarte',
+        description: 'apenas descrição',
+        category: '9',
     },
     {
         id: '6',
-        title: 'Categoria 6',
+        title: 'Item 6',
         type: 'rodizio',
+        description: 'apenas descrição',
+        category: '9',
     },
     {
         id: '7',
-        title: 'Categoria 7',
+        title: 'Item 7',
         type: 'rodizio',
+        description: 'apenas descrição',
+        category: '9',
     },
     {
         id: '8',
-        title: 'Categoria 8',
+        title: 'Item 8',
         type: 'rodizio',
+        description: 'apenas descrição',
+        category: '9',
     },
     {
         id: '9',
-        title: 'Categoria 9',
+        title: 'Item 9',
         type: 'aLaCarte',
+        description: 'apenas descrição',
+        category: '9',
     },
 ];
 
@@ -63,13 +81,19 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
 
 
 const selectItem = (id) =>{
-    Alert.alert("",id)
+    Alert.alert("Item selecionada:",id)
 }
 
 
-export default function Home () {
+export default function CategoryItems () {
 
     const [selectedId, setSelectedId] = useState(null);
+
+    const params = useRoute()
+    //recupera a categoria selecionada
+    const categoryId = params.params?.category
+    const menuType = params.params?.type
+    const navigation = useNavigation()
 
     const renderItem = ({ item }) => {
         const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#d9d9d9";
@@ -78,7 +102,7 @@ export default function Home () {
         return (
           <Item
             item={item}
-            onPress={selectItem(item.id)}
+            onPress={() => selectItem(item.id)}
             backgroundColor={{ backgroundColor }}
             textColor={{ color }}
           />
@@ -86,19 +110,18 @@ export default function Home () {
     }
     
 
-    const params = useRoute()
-    //recupera valor passado na tela de tipo cardapio
-    const menuType = params.params.menuType
-    const navigation = useNavigation()
+    
 
 
     let filteredDATA = DATA.filter((item) => {
-        return item.type.match(menuType); 
+        return item.category.match(categoryId) && item.type.match(menuType); 
     });
 
     return (
-        <View style={{flex: 1, justifyContent: "flex-start", alignItems: "center"}}>
+        <Container>
             <Header user="Pedro" />
+
+            <Text style={{color: '#fff'}}>Categoria: {categoryId}</Text>
 
             <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
                 <FlatList
@@ -109,7 +132,7 @@ export default function Home () {
                     extraData={selectedId}
                 />
             </View>
-        </View>
+        </Container>
     )
 }
 

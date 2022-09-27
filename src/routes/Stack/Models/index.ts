@@ -9,6 +9,10 @@ export type propsNavigationStack = {
         menuType: string
     } 
     Register: undefined
+    CategoryItems: {
+        type: string,
+        category: number
+    }
 }
 
 export type propsStack = NativeStackNavigationProp<propsNavigationStack>

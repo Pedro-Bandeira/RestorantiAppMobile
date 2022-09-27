@@ -4,13 +4,15 @@ import Header from "../../components/Header/Index";
 
 import { propsStack } from '../../routes/Stack/Models';
 
+import {Container, ActionButton, ActionButtonText, LogoGrande} from '../styles'
+
 
 export default function MenuType() {
     const params = useRoute()
     const navigation = useNavigation<propsStack>()
     
     return (
-        <View style={styles.container}>
+        <Container >
             <StatusBar hidden={true} />
             <Header user={params?.params?.user}/>
 
@@ -30,7 +32,7 @@ export default function MenuType() {
                     <Text>À la carte</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </Container>
     )
 }
 

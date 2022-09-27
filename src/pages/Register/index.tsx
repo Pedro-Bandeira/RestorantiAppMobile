@@ -3,6 +3,9 @@ import { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image, Alert } from "react-native";
 import { propsStack } from "../../routes/Stack/Models";
 
+
+import {Container, ActionButton, ActionButtonText, LogoGrande} from '../styles'
+
 export default function Register() {
 
     const navigation = useNavigation<propsStack>()
@@ -22,12 +25,12 @@ export default function Register() {
     }
 
     return(
-        <View style={styles.container}>
+        <Container>
             <Text style={styles.header}>CADASTRO</Text>
 
             <View style={styles.inputs}>
 
-                <Image 
+                <LogoGrande 
                     source={require('../../../assets/icon.png')}
                     style={styles.logo}
                 />
@@ -55,16 +58,14 @@ export default function Register() {
                 />
             </View>
 
-            <TouchableOpacity style={styles.actionButton} 
-                onPress={registerUser}>
-                <Text style={styles.actionButtonText}>Cadastrar</Text>
-            </TouchableOpacity>
+            <ActionButton onPress={registerUser}>
+                <ActionButtonText>Cadastrar</ActionButtonText>
+            </ActionButton>
 
-            <TouchableOpacity onPress={() => navigation.goBack()}
-                style={styles.actionButton}>
-                <Text style={styles.actionButtonText}>Voltar</Text>
-            </TouchableOpacity>
-        </View>
+            <ActionButton onPress={() => navigation.goBack()}>
+                <ActionButtonText>Voltar</ActionButtonText>
+            </ActionButton>
+        </Container>
     )
 }
 

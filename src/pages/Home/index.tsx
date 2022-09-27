@@ -5,7 +5,7 @@ import React, {useState} from "react"
 
 import { propsStack } from "../../routes/Stack/Models";
 
-
+import {Container, ActionButton, ActionButtonText, LogoGrande} from '../styles'
 
 const DATA = [
     {
@@ -63,13 +63,18 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
 
 
 const selectItem = (id) =>{
-    Alert.alert("",id)
+    Alert.alert("Categoria selecionada:",id)
 }
 
 
 export default function Home () {
 
     const [selectedId, setSelectedId] = useState(null);
+
+    const navigation = useNavigation()
+    const params = useRoute()
+    //recupera valor passado na tela de tipo cardapio
+    const menuType = params.params?.menuType
 
     const renderItem = ({ item }) => {
         const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#d9d9d9";
@@ -78,7 +83,7 @@ export default function Home () {
         return (
           <Item
             item={item}
-            onPress={selectItem(item.id)}
+            onPress={() => navigation.navigate("CategoryItems", {type: menuType, category: item.id})}
             backgroundColor={{ backgroundColor }}
             textColor={{ color }}
           />
@@ -86,19 +91,20 @@ export default function Home () {
     }
     
 
-    const params = useRoute()
-    //recupera valor passado na tela de tipo cardapio
-    const menuType = params.params.menuType
-    const navigation = useNavigation()
+    
+    
 
 
+    // Cria nova lista de itens filtradas a partir do tipo cardapio
     let filteredDATA = DATA.filter((item) => {
         return item.type.match(menuType); 
     });
 
     return (
-        <View style={{flex: 1, justifyContent: "flex-start", alignItems: "center"}}>
+        <Container>
             <Header user="Pedro" />
+
+            <Text style={{color: '#fff'}}>CATEGORIAS</Text>
 
             <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
                 <FlatList
@@ -109,7 +115,7 @@ export default function Home () {
                     extraData={selectedId}
                 />
             </View>
-        </View>
+        </Container>
     )
 }
 

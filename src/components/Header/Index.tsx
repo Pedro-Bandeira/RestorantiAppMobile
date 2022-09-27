@@ -5,6 +5,8 @@ import { useNavigation } from "@react-navigation/native";
 import { propsStack } from '../../routes/Stack/Models';
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import {Container} from './styles'
+
 var width = Dimensions.get('window').width; //full width
 
 export default function Header(props: { user: string}) {
@@ -25,24 +27,26 @@ export default function Header(props: { user: string}) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Image 
-                source={require('../../../assets/icon.png')}
-                style={styles.logo}
-            />
+            <Container>
+                <Image 
+                    source={require('../../../assets/icon.png')}
+                    style={styles.logo}
+                />
 
-            <View style={styles.rightContent}>
-                <View style={styles.userInfo}>
-                    <Text style={{fontSize: 16}}>Olá, {props.user.toUpperCase()}</Text>
+                <View style={styles.rightContent}>
+                    <View style={styles.userInfo}>
+                        <Text style={{fontSize: 16, color: '#fff'}}>Olá, {props.user.toUpperCase()}</Text>
 
-                    <TouchableOpacity>
-                        <AntDesign name="user" size={24} color="black" style={{left: 5}}/>
+                        <TouchableOpacity>
+                            <AntDesign name="user" size={24} color="gray" style={{left: 5}}/>
+                        </TouchableOpacity>
+                    </View>
+
+                    <TouchableOpacity onPress={logOff}>
+                        <Text style={styles.logoutButton}>SAIR</Text>
                     </TouchableOpacity>
                 </View>
-
-                <TouchableOpacity onPress={logOff}>
-                    <Text style={styles.logoutButton}>SAIR</Text>
-                </TouchableOpacity>
-            </View>
+            </Container>
         </SafeAreaView>
 
     );
@@ -56,15 +60,15 @@ const styles = StyleSheet.create({
         alignItems: "center",
         height: 60,
         width: width,
-        paddingLeft: 25,
-        paddingRight: 25,
-        backgroundColor: "#D9D9D9",
+        // paddingLeft: 25,
+        // paddingRight: 25,
+        // backgroundColor: "#D9D9D9",
         
     },
 
     logo: {
-        width: 50,
-        height: 50,
+        width: 100,
+        height: 80,
         borderRadius: 100,
     },
 

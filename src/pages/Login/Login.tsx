@@ -5,6 +5,11 @@ import { useNavigation } from '@react-navigation/native';
 import { propsStack } from '../../routes/Stack/Models';
 import { useState } from 'react';
 
+
+import {Container, ActionButton, ActionButtonText, LogoGrande} from '../styles'
+
+
+
 export default function Login() {
 
   const navigation = useNavigation<propsStack>()
@@ -27,9 +32,9 @@ export default function Login() {
   }
 
   return (
-      <View style={styles.container}>
+      <Container>
           <View style={styles.inputsLogo}>
-              <Image 
+              <LogoGrande 
                   source={require('../../../assets/icon.png')}
                   style={styles.logo}
               />
@@ -53,29 +58,26 @@ export default function Login() {
 
 
           <View style={styles.buttons}>
-            <TouchableOpacity 
-              onPress={() => navigation.navigate("Menu", {user: "Mesa"})}
-              style={styles.actionButton}>
-              <Text style={styles.actionButtonText}>Continuar sem login</Text>
-            </TouchableOpacity>
+            <ActionButton 
+              onPress={() => navigation.navigate("Menu", {user: "Mesa"})}>
+              <ActionButtonText>Continuar sem login</ActionButtonText>
+            </ActionButton>
 
-            <TouchableOpacity 
-              onPress={validaLogin}
-              style={styles.actionButton}>
-              <Text style={styles.actionButtonText}>Login</Text>
-            </TouchableOpacity>
+            <ActionButton 
+              onPress={validaLogin}>
+              <ActionButtonText>Login</ActionButtonText>
+            </ActionButton>
 
-            <TouchableOpacity 
-              onPress={() => navigation.navigate("Register")}
-              style={styles.actionButton}>
-              <Text style={styles.actionButtonText}>Cadastro</Text>
-            </TouchableOpacity>
+            <ActionButton 
+              onPress={() => navigation.navigate("Register")}>
+              <ActionButtonText>Cadastro</ActionButtonText>
+            </ActionButton>
 
             <Text style={styles.forgotPassword} onPress={loginTeste}>Esqueceu a senha?</Text>
           </View>
 
-      <StatusBar style="auto" />
-      </View>
+        <StatusBar style="auto" />
+      </Container>
   );
 }
 
@@ -124,21 +126,4 @@ const styles = StyleSheet.create({
     top: 20
   },
 
-  actionButton: {
-    backgroundColor: "#bdccdb",
-    height: 50,
-    width: 250,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderTopStartRadius: 20,
-    borderBottomEndRadius: 20,
-    borderTopEndRadius: 5,
-    borderBottomStartRadius: 5,
-    marginTop: 20
-  },
-
-  actionButtonText: {
-    fontWeight: 'bold',
-    fontSize: 18,
-  }
 });
