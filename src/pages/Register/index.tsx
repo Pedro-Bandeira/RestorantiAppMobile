@@ -32,7 +32,6 @@ export default function Register() {
 
                 <LogoGrande 
                     source={require('../../../assets/icon.png')}
-                    style={styles.logo}
                 />
 
                 <TextInput 
@@ -70,21 +69,6 @@ export default function Register() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#2c3e50',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      flexDirection: 'column',
-      paddingTop: 64
-    },
-
-    logo: {
-        width: 150,
-        height: 150,
-        borderRadius: 100,
-        bottom: 50
-    },
 
     input: {
         backgroundColor: '#eff2f6',
@@ -103,28 +87,12 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
 
-    actionButton: {
-        backgroundColor: "#bdccdb",
-        height: 50,
-        width: 250,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderTopStartRadius: 20,
-        borderBottomEndRadius: 20,
-        borderTopEndRadius: 5,
-        borderBottomStartRadius: 5,
-        marginTop: 20
-    },
-
-    actionButtonText: {
-        fontWeight: 'bold',
-        fontSize: 18,
-    } ,
 
     header: {
         color: '#fff',
         fontWeight: "bold",
         fontSize: 20,
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        top: -20
     }
 })

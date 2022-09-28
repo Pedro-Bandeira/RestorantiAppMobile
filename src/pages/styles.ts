@@ -37,3 +37,11 @@ export const LogoGrande = styled.Image`
     border-radius: 100px;
     bottom: 50px;
 `;
+
+
+export const TituloPaginas = styled.Text`
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    top: 10px;
+`

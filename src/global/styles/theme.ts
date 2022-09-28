@@ -1,12 +1,12 @@
 export default {
     colors: {
         //background: '#2c3e50',
-        background: '#1a1a1a',
+        background: '#171520',
         actionButtonText: '#f0f0f0',
         //actionButtonBG: '#bdccdb',
-        actionButtonBG: '#660022',
+        actionButtonBG: '#6c7c94',
         text: '#000000',
-        headerBG: '#80002a',
+        headerBG: '#0a0710',
     },
 
     fonts: {

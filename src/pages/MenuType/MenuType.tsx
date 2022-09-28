@@ -4,7 +4,8 @@ import Header from "../../components/Header/Index";
 
 import { propsStack } from '../../routes/Stack/Models';
 
-import {Container, ActionButton, ActionButtonText, LogoGrande} from '../styles'
+import {Container, ActionButtonText} from '../styles'
+import {Cards} from './menu-styles'
 
 
 export default function MenuType() {
@@ -18,19 +19,17 @@ export default function MenuType() {
 
             <View style={styles.choices}>
                 <Text style={{color: '#fff'}}>Escolha seu tipo de cardápio:</Text>
-                <TouchableOpacity 
-                    style={styles.buttons}
+                <Cards 
                     onPress={() => navigation.navigate("Home", {menuType: "rodizio"})}
                 >
-                    <Text>Rodizio</Text>
-                </TouchableOpacity>
+                    <ActionButtonText>Rodízio</ActionButtonText>
+                </Cards>
 
-                <TouchableOpacity 
-                    style={styles.buttons}
+                <Cards 
                     onPress={() => navigation.navigate("Home", {menuType: "aLaCarte"})}
                 >
-                    <Text>À la carte</Text>
-                </TouchableOpacity>
+                    <ActionButtonText>À la carte</ActionButtonText>
+                </Cards>
             </View>
         </Container>
     )

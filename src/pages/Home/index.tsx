@@ -5,7 +5,7 @@ import React, {useState} from "react"
 
 import { propsStack } from "../../routes/Stack/Models";
 
-import {Container, ActionButton, ActionButtonText, LogoGrande} from '../styles'
+import {Container, ActionButton, ActionButtonText, LogoGrande, TituloPaginas} from '../styles'
 
 const DATA = [
     {
@@ -104,7 +104,7 @@ export default function Home () {
         <Container>
             <Header user="Pedro" />
 
-            <Text style={{color: '#fff'}}>CATEGORIAS</Text>
+            <TituloPaginas>CATEGORIAS</TituloPaginas>
 
             <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
                 <FlatList

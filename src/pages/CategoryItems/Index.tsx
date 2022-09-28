@@ -5,7 +5,7 @@ import React, {useState} from "react"
 
 import { propsStack } from "../../routes/Stack/Models";
 
-import {Container, ActionButton, ActionButtonText, LogoGrande} from '../styles'
+import {Container, ActionButton, ActionButtonText, LogoGrande, TituloPaginas} from '../styles'
 
 const DATA = [
     {
@@ -121,7 +121,7 @@ export default function CategoryItems () {
         <Container>
             <Header user="Pedro" />
 
-            <Text style={{color: '#fff'}}>Categoria: {categoryId}</Text>
+            <TituloPaginas>Categoria: {categoryId}</TituloPaginas>
 
             <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
                 <FlatList
