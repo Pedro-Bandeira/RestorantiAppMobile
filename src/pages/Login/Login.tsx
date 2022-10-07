@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { propsStack } from '../../routes/Stack/Models';
@@ -13,6 +13,7 @@ import {Container, ActionButton, ActionButtonText, LogoGrande} from '../styles'
 export default function Login() {
 
   const navigation = useNavigation<propsStack>()
+
 
   const loginTeste = () => {
     Alert.alert("Testando", "ainda em construção")
@@ -30,6 +31,8 @@ export default function Login() {
       navigation.navigate("Menu", {user: "user"})
     }
   }
+
+
 
   return (
       <Container>

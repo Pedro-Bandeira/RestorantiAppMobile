@@ -13,6 +13,7 @@ export type propsNavigationStack = {
         type: string,
         category: number
     }
+    Table: undefined
 }
 
 export type propsStack = NativeStackNavigationProp<propsNavigationStack>
