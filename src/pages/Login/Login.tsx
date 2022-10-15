@@ -9,7 +9,6 @@ import { useState } from 'react';
 import {Container, ActionButton, ActionButtonText, LogoGrande} from '../styles'
 
 
-
 export default function Login() {
 
   const navigation = useNavigation<propsStack>()

@@ -62,8 +62,16 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
 );
 
 
-const selectItem = (id) =>{
-    Alert.alert("Categoria selecionada:",id)
+const selectItem = () =>{
+    fetch('http://192.168.0.161:5202/api/Category/ListWithFilter?MenuType=0&Status=0')
+    .then((response) => response.json())
+    .then((json) => console.log(json))
+    .catch(function(error) {
+    console.log('There has been a problem with your fetch operation: ' + error.message);
+        // ADD THIS THROW error
+        throw error
+    });
+    
 }
 
 
@@ -115,6 +123,10 @@ export default function Home () {
                     extraData={selectedId}
                 />
             </View>
+
+            <ActionButton onPress={() => selectItem()}>
+                <ActionButtonText>TESTE</ActionButtonText>
+            </ActionButton>
         </Container>
     )
 }

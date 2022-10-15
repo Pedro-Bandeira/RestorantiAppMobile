@@ -1,11 +1,13 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { View, Text, TouchableOpacity, StyleSheet, FlatList, Alert } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, Alert, Modal, Pressable, Image, TextInput } from "react-native";
 import Header from "../../components/Header/Index";
 import React, {useState} from "react"
 
 import { propsStack } from "../../routes/Stack/Models";
 
-import {Container, ActionButton, ActionButtonText, LogoGrande, TituloPaginas} from '../styles'
+import {Container, TituloPaginas, ActionButtonText} from '../styles'
+import {ItemImage, ItemName, ItemProperties, ItemsModal, ContainerModal, Buttons, ActionButtonModal, Observacao} from './modal-styles'
+
 
 const DATA = [
     {
@@ -88,6 +90,8 @@ const selectItem = (id) =>{
 export default function CategoryItems () {
 
     const [selectedId, setSelectedId] = useState(null);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [value, onChangeText] = React.useState('Observação:');
 
     const params = useRoute()
     //recupera a categoria selecionada
@@ -102,14 +106,22 @@ export default function CategoryItems () {
         return (
           <Item
             item={item}
-            onPress={() => selectItem(item.id)}
+            onPress={() => setModalVisible(true)}
             backgroundColor={{ backgroundColor }}
             textColor={{ color }}
           />
         )
     }
     
-
+    const UselessTextInput = (props) => {
+        return (
+          <TextInput
+            {...props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
+            editable
+            maxLength={40}
+          />
+        );
+      }
     
 
 
@@ -122,6 +134,55 @@ export default function CategoryItems () {
             <Header user="Pedro" />
 
             <TituloPaginas>Categoria: {categoryId}</TituloPaginas>
+
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
+                setModalVisible(!modalVisible);
+                }}
+            >
+                <ContainerModal>
+                    <ItemsModal>
+                        <ItemProperties>
+                            <ItemImage>
+                                <Image source={require('../../../assets/icon.png')} style={{width: 20, height: 20, backgroundColor: "#000"}}></Image>
+                            </ItemImage>
+                            <ItemName>
+                                <Text>Item: </Text>
+                                <Text>Preço: </Text>
+                                <Text>Quantidade: </Text>
+                            </ItemName>
+                        </ItemProperties>
+
+
+                        <Observacao>
+                            <UselessTextInput
+                                multiline
+                                numberOfLines={4}
+                                onChangeText={text => onChangeText(text)}
+                                value={value}
+                            />
+                        </Observacao>
+
+                        <Buttons>
+                            <ActionButtonModal
+                                onPress={() => setModalVisible(!modalVisible)}
+                            >
+                                <ActionButtonText>Voltar</ActionButtonText>
+                            </ActionButtonModal>
+
+                            <ActionButtonModal
+                                onPress={() => setModalVisible(!modalVisible)}
+                            >
+                                <ActionButtonText>Adicionar</ActionButtonText>
+                            </ActionButtonModal>
+                        </Buttons>
+                    </ItemsModal>
+                </ContainerModal>
+            </Modal>
 
             <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
                 <FlatList
@@ -152,5 +213,13 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 22,
+    },
+    button: {
+        borderRadius: 10,
+        padding: 10,
+        elevation: 2
+    },
+    buttonClose: {
+        backgroundColor: "#2196F3",
     },
 });

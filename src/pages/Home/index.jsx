@@ -109,6 +109,8 @@ export default function Home () {
                     extraData={selectedId}
                 />
             </View>
+
+
         </View>
     )
 }

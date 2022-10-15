@@ -2,6 +2,7 @@ export default {
     colors: {
         //background: '#2c3e50',
         background: '#171520',
+        backgroundLight: '#fff',
         actionButtonText: '#f0f0f0',
         //actionButtonBG: '#bdccdb',
         actionButtonBG: '#6c7c94',
